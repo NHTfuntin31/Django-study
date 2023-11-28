@@ -28,8 +28,17 @@ class LessonAdmin(admin.ModelAdmin):
         return mark_safe('''
 			<img src='/static/{img_url}' alt='{alt}' width='50px'/>
         '''.format(img_url=lesson.image.name, alt=lesson.subject))
+        
+        
+class LessonInline(admin.StackedInline):
+	model = Lesson
+	pk_name = 'course'
+        
+        
+class CourseAdmin(admin.ModelAdmin):
+	inlines = (LessonInline, )
 
 
 admin.site.register(Category)
-admin.site.register(Course)
+admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
