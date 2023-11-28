@@ -43,7 +43,7 @@ class Lesson(ItemBase):
     
     content = RichTextField()
     course = models.ForeignKey(Course, related_name="lessons", on_delete=models.CASCADE)
-    tags = models.ManyToManyField('Tag', blank=True, null=True)
+    tags = models.ManyToManyField('Tag', related_name="lessons", blank=True, null=True)
     
 	
 class Tag(models.Model):
