@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class User(AbstractUser):
@@ -40,7 +41,7 @@ class Lesson(ItemBase):
         unique_together = ('subject', 'course')
         # db_table = '...'
     
-    content = models.TextField()
+    content = RichTextField()
     course = models.ForeignKey(Course, related_name="lessons", on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True, null=True)
     
