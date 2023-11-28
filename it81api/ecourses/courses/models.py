@@ -18,6 +18,7 @@ class ItemBase(models.Model):
         
     subject = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to='courses/%Y/%m', default=None)
+    #MEDIAROOT + upload_to
     created_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
