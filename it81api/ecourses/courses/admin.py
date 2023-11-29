@@ -1,7 +1,8 @@
 from django.contrib import admin
 #them
+from django.contrib.auth.models import Permission
 from django.utils.html import mark_safe
-from .models import Category, Course, Lesson, Tag
+from .models import Category, Course, Lesson, Tag, User
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django.urls import path
@@ -66,9 +67,11 @@ class CourseAppAdminSite(admin.AdminSite):
     
 admin_site = CourseAppAdminSite('mycourse')
 
-admin_site.register(Category)
-admin_site.register(Course, CourseAdmin)
-admin_site.register(Lesson, LessonAdmin)
-# admin.site.register(Category)
-# admin.site.register(Course, CourseAdmin)
-# admin.site.register(Lesson, LessonAdmin)
+# admin_site.register(Category)
+# admin_site.register(Course, CourseAdmin)
+# admin_site.register(Lesson, LessonAdmin)
+admin.site.register(Category)
+admin.site.register(Course, CourseAdmin)
+admin.site.register(Lesson, LessonAdmin)
+admin.site.register(User)
+admin.site.register(Permission)
