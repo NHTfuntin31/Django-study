@@ -6,10 +6,11 @@ from rest_framework.response import Response
 from .models import Course, Lesson, User
 from .serializers import CourseSerializer, LessonSerializer, UserSerializer
 from rest_framework.parsers import MultiPartParser
+from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
 
-class UserViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateAPIView, generics.RetrieveAPIView):
+class UserViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.RetrieveAPIView):
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserSerializer
     parser_classes = [MultiPartParser, ]
@@ -29,7 +30,9 @@ class CourseViewSet(viewsets.ModelViewSet):
     #...(put)
     #...(delete)
     
-    permission_classes = [permissions.IsAuthenticated]
+    # swagger_schema = None
+    
+    # permission_classes = [permissions.IsAuthenticated]
     
     # def get_permissions(self):
     #     if self.action == 'list':
@@ -41,6 +44,13 @@ class CourseViewSet(viewsets.ModelViewSet):
 class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.filter(active=True)
     serializer_class = LessonSerializer
+    
+    @swagger_auto_schema(
+        operation_description='api nay dung de an 1 bai viet tu phia client',
+        responses= {
+            status.HTTP_200_OK: LessonSerializer()
+        }
+    )
     
     #an lesson (active=flase)
     @action(methods=['post'], detail=True, url_path="hide-lesson", url_name="hide-lesson")
