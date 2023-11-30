@@ -10,7 +10,7 @@ from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
 
-class UserViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.RetrieveAPIView):
+class UserViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.RetrieveAPIView, generics.ListAPIView):
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserSerializer
     parser_classes = [MultiPartParser, ]
