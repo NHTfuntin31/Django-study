@@ -1,12 +1,25 @@
 from django.shortcuts import render
 #
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework import status
-from .models import Course, Lesson
-from .serializers import CourseSerializer, LessonSerializer
+from .models import Course, Lesson, User
+from .serializers import CourseSerializer, LessonSerializer, UserSerializer
+from rest_framework.parsers import MultiPartParser
 # Create your views here.
+
+
+class UserViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateAPIView, generics.RetrieveAPIView):
+    queryset = User.objects.filter(is_active=True)
+    serializer_class = UserSerializer
+    parser_classes = [MultiPartParser, ]
+    
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            return [permissions.IsAuthenticated()]
+        
+        return [permissions.AllowAny()]
+
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.filter(active=True)
     serializer_class = CourseSerializer
@@ -16,13 +29,13 @@ class CourseViewSet(viewsets.ModelViewSet):
     #...(put)
     #...(delete)
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
-    def get_permissions(self):
-        if self.action == 'list':
-            return [permissions.AllowAny()]
+    # def get_permissions(self):
+    #     if self.action == 'list':
+    #         return [permissions.AllowAny()]
 
-        return [permissions.IsAuthenticated()]
+    #     return [permissions.IsAuthenticated()]
 
 
 class LessonViewSet(viewsets.ModelViewSet):
