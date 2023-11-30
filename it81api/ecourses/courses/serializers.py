@@ -18,4 +18,4 @@ class LessonSerializer(ModelSerializer):
     tags = TagSerializer(many=True)
     class Meta:
         model = Lesson
-        fields = ["id", "subject", "content", "created_date", "course", "tags"]
+        fields = ["id", "subject", "content", "created_date", "image","course", "tags"]

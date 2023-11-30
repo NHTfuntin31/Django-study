@@ -40,7 +40,7 @@ class LessonViewSet(viewsets.ModelViewSet):
         except Lesson.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        Response(data=LessonSerializer(l).data, status=status.HTTP_200_OK)
+        return Response(data=LessonSerializer(l, context={'request': request}).data, status=status.HTTP_200_OK)
 
 def index(request):
 	return render(request, template_name='index.html', context = {
