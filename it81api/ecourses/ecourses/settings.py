@@ -113,7 +113,7 @@ DATABASES = {
     # }
 }
 
-#them
+##them
 AUTH_USER_MODEL = 'courses.User'
 
 

@@ -34,11 +34,11 @@ class CourseViewSet(viewsets.ModelViewSet):
     
     # permission_classes = [permissions.IsAuthenticated]
     
-    # def get_permissions(self):
-    #     if self.action == 'list':
-    #         return [permissions.AllowAny()]
+    def get_permissions(self):
+        if self.action == 'list':
+            return [permissions.AllowAny()]
 
-    #     return [permissions.IsAuthenticated()]
+        return [permissions.IsAuthenticated()]
 
 
 class LessonViewSet(viewsets.ModelViewSet):
