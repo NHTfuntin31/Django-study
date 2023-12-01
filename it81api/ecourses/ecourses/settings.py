@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'drf_yasg',
     'debug_toolbar',
+    'corsheaders',
 ]
 
 ##paginate
@@ -71,7 +72,14 @@ MIDDLEWARE = [
     
     #
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'ecourses.urls'
 
